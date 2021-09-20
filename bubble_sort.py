@@ -83,6 +83,7 @@ tracemalloc.stop()
 
 ############################################################################
 
+"""
 
 from data.emp50mil import empresas
 from time import time
@@ -106,4 +107,28 @@ print(f"Pico de memória: {mem_pico / 1024 / 1024}MB")
 
 tracemalloc.stop()
 
+"""
+
 ###############################################################################
+
+from data.emp100mil import empresas
+from time import time
+import tracemalloc
+
+ini = time()
+
+tracemalloc.start()
+
+bubble_sort(empresas)
+
+mem_atual, mem_pico = tracemalloc.get_traced_memory()
+
+fim = time()
+
+# print(empresas)    # Para não ficar aparecendo as empresas no terminal
+print("100mil empresas:")
+print(f"Tempo: {fim - ini}")
+
+print(f"Pico de memória: {mem_pico / 1024 / 1024}MB")
+
+tracemalloc.stop()
